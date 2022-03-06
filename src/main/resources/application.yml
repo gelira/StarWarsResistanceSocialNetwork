@@ -6,3 +6,6 @@ spring:
     url: 'jdbc:postgresql://172.25.0.13:5432/star_wars_resistance_social_network'
     username: 'postgres'
     password: 'abc@123'
+
+  liquibase:
+    change-log: 'classpath:/db/changelog/changelog-master.xml'
