@@ -1,0 +1,99 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220308T0005-create-table-deals",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "deals",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "unique": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "rebel1_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "rebel2_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "deals_rebel1_id_fk_rebels_id",
+              "baseColumnNames": "rebel1_id",
+              "baseTableName": "deals",
+              "referencedColumnNames": "id",
+              "referencedTableName": "rebels",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "deals_rebel2_id_fk_rebels_id",
+              "baseColumnNames": "rebel2_id",
+              "baseTableName": "deals",
+              "referencedColumnNames": "id",
+              "referencedTableName": "rebels",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

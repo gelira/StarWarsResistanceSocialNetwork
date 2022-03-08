@@ -1,0 +1,114 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220307T2310-create-table-locations",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "locations",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "unique": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "rebel_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "latitude",
+                    "type": "double precision",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "longitude",
+                    "type": "double precision",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "galaxy_name",
+                    "type": "varchar(255)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "current",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "locations_rebel_id_fk_rebels_id",
+              "baseColumnNames": "rebel_id",
+              "baseTableName": "locations",
+              "referencedColumnNames": "id",
+              "referencedTableName": "rebels",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
