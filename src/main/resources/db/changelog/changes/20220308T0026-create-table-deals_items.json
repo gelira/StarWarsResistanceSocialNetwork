@@ -1,0 +1,152 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220308T0026-create-table-deals_items",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "deals_items",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "unique": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "deal_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "source_rebel_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "receiver_rebel_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "item_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "quantity",
+                    "type": "int",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "defaultValueComputed": "current_timestamp",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "defaultValueComputed": "current_timestamp",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "deals_items_deal_id_fk_deals_id",
+              "baseColumnNames": "deal_id",
+              "baseTableName": "deals_items",
+              "referencedColumnNames": "id",
+              "referencedTableName": "deals",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "deals_items_source_rebel_id_fk_rebels_id",
+              "baseColumnNames": "source_rebel_id",
+              "baseTableName": "deals_items",
+              "referencedColumnNames": "id",
+              "referencedTableName": "rebels",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "deals_items_receiver_rebel_id_fk_rebels_id",
+              "baseColumnNames": "receiver_rebel_id",
+              "baseTableName": "deals_items",
+              "referencedColumnNames": "id",
+              "referencedTableName": "rebels",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "deals_items_item_id_fk_items_id",
+              "baseColumnNames": "item_id",
+              "baseTableName": "deals_items",
+              "referencedColumnNames": "id",
+              "referencedTableName": "items",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

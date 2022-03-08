@@ -1,0 +1,112 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220308T0057-add-data-table-items",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "insert": {
+              "tableName": "items",
+              "columns": [
+                {
+                  "column": {
+                    "name": "_id",
+                    "value": "ad2d1795-ff26-41b7-be9e-c34b80deec28"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "value": "Arma"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "value",
+                    "value": "4"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "items",
+              "columns": [
+                {
+                  "column": {
+                    "name": "_id",
+                    "value": "53c5d39a-c430-4d73-a097-768783c6482d"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "value": "Munição"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "value",
+                    "value": "3"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "items",
+              "columns": [
+                {
+                  "column": {
+                    "name": "_id",
+                    "value": "cc88f19d-0648-4518-b0ab-519c1c7f669b"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "value": "Água"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "value",
+                    "value": "2"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "items",
+              "columns": [
+                {
+                  "column": {
+                    "name": "_id",
+                    "value": "2be1df29-8a46-4221-91a0-9cb3c3f2e8ff"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "value": "Comida"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "value",
+                    "value": "1"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

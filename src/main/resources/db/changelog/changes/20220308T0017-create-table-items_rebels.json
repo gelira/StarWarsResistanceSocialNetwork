@@ -1,0 +1,110 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220308T0017-create-table-items_rebels",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "items_rebels",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true,
+                    "constraints": {
+                      "primaryKey": true
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "unique": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "rebel_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "item_id",
+                    "type": "bigint",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "quantity",
+                    "type": "int",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "defaultValueComputed": "current_timestamp",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "defaultValueComputed": "current_timestamp",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "items_rebels_rebel_id_fk_rebels_id",
+              "baseColumnNames": "rebel_id",
+              "baseTableName": "items_rebels",
+              "referencedColumnNames": "id",
+              "referencedTableName": "rebels",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "constraintName": "items_rebels_item_id_fk_items_id",
+              "baseColumnNames": "item_id",
+              "baseTableName": "items_rebels",
+              "referencedColumnNames": "id",
+              "referencedTableName": "items",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
