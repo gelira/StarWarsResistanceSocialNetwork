@@ -52,6 +52,7 @@
                   "column": {
                     "name": "created_at",
                     "type": "timestamp with time zone",
+                    "defaultValueComputed": "current_timestamp",
                     "constraints": {
                       "nullable": false
                     }
@@ -61,6 +62,7 @@
                   "column": {
                     "name": "updated_at",
                     "type": "timestamp with time zone",
+                    "defaultValueComputed": "current_timestamp",
                     "constraints": {
                       "nullable": false
                     }
