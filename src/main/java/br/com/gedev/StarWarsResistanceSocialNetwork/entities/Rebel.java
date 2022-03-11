@@ -1,6 +1,8 @@
 package br.com.gedev.StarWarsResistanceSocialNetwork.entities;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,24 +15,32 @@ import java.util.UUID;
 public class Rebel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
+
+    @Setter(AccessLevel.NONE)
     private UUID _id;
+
     private String name;
     private Integer age;
     private Integer accusedCount;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Setter(AccessLevel.NONE)
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Setter(AccessLevel.NONE)
     private Date updatedAt;
 
     @OneToMany
     @JoinColumn(name = "rebel_id")
+    @Setter(AccessLevel.NONE)
     private List<Location> locations;
 
     @OneToMany
     @JoinColumn(name = "rebel_id")
+    @Setter(AccessLevel.NONE)
     private List<ItemRebel> itemsRebel;
 
     @PrePersist
