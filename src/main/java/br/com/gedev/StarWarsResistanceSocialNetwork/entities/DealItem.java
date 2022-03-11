@@ -1,0 +1,50 @@
+package br.com.gedev.StarWarsResistanceSocialNetwork.entities;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.UUID;
+
+@Data
+@Entity
+@Table(name = "deals_items")
+public class DealItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private UUID _id;
+    private Integer quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "deal_id")
+    private Deal deal;
+
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+
+    @ManyToOne
+    @JoinColumn(name = "source_rebel_id")
+    private Rebel sourceRebel;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_rebel_id")
+    private Rebel receiverRebel;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @PrePersist
+    private void setUUID() {
+        _id = UUID.randomUUID();
+    }
+
+    @PreUpdate
+    private void setUpdatedTimestamp() {
+        updatedAt = new Date();
+    }
+}
