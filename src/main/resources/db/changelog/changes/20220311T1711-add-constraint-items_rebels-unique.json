@@ -1,0 +1,22 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220311T1711-add-constraint-items_rebels-unique",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "addUniqueConstraint": {
+              "constraintName": "items_rebels_item_id_rebel_id_key",
+              "tableName": "items_rebels",
+              "columnNames": "item_id, rebel_id",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
