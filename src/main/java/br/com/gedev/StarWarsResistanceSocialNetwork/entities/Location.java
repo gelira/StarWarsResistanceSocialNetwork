@@ -30,12 +30,12 @@ public class Location {
     private Rebel rebel;
 
     @PrePersist
-    private void setUUID() {
+    private void prePersist() {
         _id = UUID.randomUUID();
     }
 
     @PreUpdate
-    private void setUpdatedTimestamp() {
+    private void preUpdate() {
         updatedAt = new Date();
     }
 }

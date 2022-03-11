@@ -31,12 +31,12 @@ public class ItemRebel {
     private Date updatedAt;
 
     @PrePersist
-    private void setUUID() {
+    private void prePersist() {
         _id = UUID.randomUUID();
     }
 
     @PreUpdate
-    private void setUpdatedTimestamp() {
+    private void preUpdate() {
         updatedAt = new Date();
     }
 }
