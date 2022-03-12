@@ -1,0 +1,19 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220312T2144-add-default-value-accused_count-table-rebels",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "addDefaultValue": {
+              "tableName": "rebels",
+              "columnName": "accused_count",
+              "defaultValue": "0"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

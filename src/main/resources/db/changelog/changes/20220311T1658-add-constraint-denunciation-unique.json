@@ -1,0 +1,22 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "20220311T1658-add-constraint-denunciation-unique",
+        "author": "Geraldo Eloi",
+        "changes": [
+          {
+            "addUniqueConstraint": {
+              "constraintName": "denunciations_accuser_rebel_id_accused_rebel_id_key",
+              "tableName": "denunciations",
+              "columnNames": "accuser_rebel_id, accused_rebel_id",
+              "validate": true,
+              "deferrable": true,
+              "initiallyDeferred": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
