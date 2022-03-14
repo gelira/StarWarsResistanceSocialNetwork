@@ -23,6 +23,7 @@ public class Rebel {
 
     private String name;
     private Integer age;
+    private String genre;
     private Integer accusedCount;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -46,6 +47,9 @@ public class Rebel {
     @PrePersist
     private void prePersist() {
         _id = UUID.randomUUID();
+        accusedCount = 0;
+        createdAt = new Date();
+        updatedAt = new Date();
     }
 
     @PreUpdate

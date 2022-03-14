@@ -40,6 +40,9 @@ public class Location {
     @PrePersist
     private void prePersist() {
         _id = UUID.randomUUID();
+        current = true;
+        createdAt = new Date();
+        updatedAt = new Date();
     }
 
     @PreUpdate
