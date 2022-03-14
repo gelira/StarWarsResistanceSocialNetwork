@@ -23,4 +23,6 @@ public class RebelDTO {
 
     @JsonProperty("updated_at")
     private Date updatedAt;
+
+    private LocationDTO location;
 }
