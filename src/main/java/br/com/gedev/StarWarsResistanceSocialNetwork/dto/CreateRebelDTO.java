@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +27,7 @@ public class CreateRebelDTO {
 
     @NotNull
     private CreateLocationDTO location;
+
+    @NotNull
+    private List<@Valid CreateItemRebelDTO> inventory;
 }

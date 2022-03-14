@@ -5,26 +5,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
-public class RebelDTO {
+public class ItemRebelDTO {
     private UUID _id;
-    private String name;
-    private Integer age;
-    private String genre;
+    private Integer quantity;
 
-    @JsonProperty("accused_count")
-    private Integer accusedCount;
+    @JsonProperty("item_id")
+    private UUID itemId;
+
+    @JsonProperty("item_name")
+    private String itemName;
 
     @JsonProperty("created_at")
     private Date createdAt;
 
     @JsonProperty("updated_at")
     private Date updatedAt;
-
-    private LocationDTO location;
-    private List<ItemRebelDTO> inventory;
 }
