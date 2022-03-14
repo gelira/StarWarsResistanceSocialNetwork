@@ -22,4 +22,7 @@ public class CreateRebelDTO {
     @NotNull
     @Pattern(regexp = "human|gree|rakata", message = "must be 'human', 'gree' or 'rakata'")
     private String genre;
+
+    @NotNull
+    private CreateLocationDTO location;
 }
