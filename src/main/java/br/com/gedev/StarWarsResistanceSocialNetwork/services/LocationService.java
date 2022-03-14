@@ -17,7 +17,7 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public Optional<Location> fetchCurrentLocation(Rebel rebel) {
+    public Optional<Location> findCurrentLocation(Rebel rebel) {
         return locationRepository.findCurrentLocation(rebel.getId());
     }
 }

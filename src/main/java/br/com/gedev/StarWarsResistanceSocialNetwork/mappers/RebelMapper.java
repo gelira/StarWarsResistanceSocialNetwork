@@ -25,7 +25,7 @@ public class RebelMapper {
     public RebelDTO fromEntityToRebelDTO(Rebel entity) {
         RebelDTO dto = modelMapper.map(entity, RebelDTO.class);
 
-        Optional<Location> locationOptional = locationService.fetchCurrentLocation(entity);
+        Optional<Location> locationOptional = locationService.findCurrentLocation(entity);
         locationOptional.ifPresent(location -> dto.setLocation(locationMapper.fromEntityToDTO(location)));
 
         return dto;
