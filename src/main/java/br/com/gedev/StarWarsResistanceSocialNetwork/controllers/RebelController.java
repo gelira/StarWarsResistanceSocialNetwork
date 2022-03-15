@@ -32,12 +32,10 @@ public class RebelController {
 
     @PostMapping
     public RebelDTO createRebel(@Valid @RequestBody CreateRebelDTO createRebelDTO) throws InvalidItemIdException {
-        List<CreateItemRebelDTO> createItemRebelDTOList =
-                itemRebelBusiness.validateAndAggregateItems(createRebelDTO.getInventory());
+        List<ItemRebel> itemRebelList = itemRebelBusiness.validateAndAggregateItems(createRebelDTO.getInventory());
 
         Rebel rebelToCreate = rebelMapper.fromCreateDTOToEntity(createRebelDTO);
         Location locationToCreate = locationMapper.fromCreateDTOToEntity(createRebelDTO.getLocation());
-        List<ItemRebel> itemRebelList = itemRebelMapper.fromCreateDTOListToEntityList(createItemRebelDTOList);
 
         Rebel rebelCreated = rebelService.createRebel(rebelToCreate, locationToCreate, itemRebelList);
         return rebelMapper.fromEntityToRebelDTO(rebelCreated);
