@@ -17,11 +17,9 @@ public class ItemRebelBusiness {
 
     public List<ItemRebel> validateAndAggregateItems(
             List<CreateItemRebelDTO> createItemRebelDTOs) throws InvalidItemIdException {
-
-        ItemsEnum[] itemsEnums = ItemsEnum.values();
         Map<UUID, CreateItemRebelDTO> mapItems = new HashMap<>();
 
-        for (ItemsEnum itemEnum : itemsEnums) {
+        for (ItemsEnum itemEnum : ItemsEnum.values()) {
             UUID itemId = itemEnum.getUUID();
 
             CreateItemRebelDTO itemMap = new CreateItemRebelDTO();
