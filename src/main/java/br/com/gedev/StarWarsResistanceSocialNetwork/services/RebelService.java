@@ -3,12 +3,14 @@ package br.com.gedev.StarWarsResistanceSocialNetwork.services;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.ItemRebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Location;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
+import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RebelNotFoundException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.repositories.RebelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -30,5 +32,10 @@ public class RebelService {
         }
 
         return rebelCreated;
+    }
+
+    public Rebel findRebelByUUID(UUID rebelId) throws RebelNotFoundException {
+        return rebelRepository.findByUUID(rebelId)
+                .orElseThrow(RebelNotFoundException::new);
     }
 }
