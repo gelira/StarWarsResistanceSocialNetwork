@@ -36,13 +36,11 @@ public class Rebel {
     @Setter(AccessLevel.NONE)
     private Date updatedAt;
 
-    @OneToMany
-    @JoinColumn(name = "rebel_id")
+    @OneToMany(mappedBy = "rebel")
     @Setter(AccessLevel.NONE)
     private List<Location> locations;
 
-    @OneToMany
-    @JoinColumn(name = "rebel_id")
+    @OneToMany(mappedBy = "rebel")
     @Setter(AccessLevel.NONE)
     private List<ItemRebel> itemsRebel;
 

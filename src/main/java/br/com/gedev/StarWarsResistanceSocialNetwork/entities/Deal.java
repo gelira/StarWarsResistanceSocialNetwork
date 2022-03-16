@@ -29,8 +29,7 @@ public class Deal {
     @JoinColumn(name = "rebel2_id")
     private Rebel rebel2;
 
-    @OneToMany
-    @JoinColumn(name = "deal_id")
+    @OneToMany(mappedBy = "deal")
     @Setter(AccessLevel.NONE)
     private List<DealItem> dealItems;
 
