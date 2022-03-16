@@ -2,10 +2,9 @@ package br.com.gedev.StarWarsResistanceSocialNetwork.business;
 
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.CreateDenunciationDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Denunciation;
-import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.AccusedRebelNotFoundException;
-import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.AccuserRebelNotFoundException;
-import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.AutoDenunciationException;
-import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RebelNotFoundException;
+import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
+import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.*;
+import br.com.gedev.StarWarsResistanceSocialNetwork.services.DenunciationService;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.RebelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,9 +16,11 @@ import java.util.UUID;
 @Component
 public class DenunciationBusiness {
     private final RebelService rebelService;
+    private final DenunciationService denunciationService;
 
     public Denunciation validateDenunciation(CreateDenunciationDTO createDenunciationDTO)
-            throws AutoDenunciationException, AccuserRebelNotFoundException, AccusedRebelNotFoundException {
+            throws AutoDenunciationException, AccuserRebelNotFoundException,
+                AccusedRebelNotFoundException, RepeatedDenunciationException {
         UUID accusedId = createDenunciationDTO.getAccusedRebelId();
         UUID accuserId = createDenunciationDTO.getAccuserRebelId();
 
@@ -28,18 +29,27 @@ public class DenunciationBusiness {
         }
 
         Denunciation denunciation = new Denunciation();
+        Rebel accuserRebel, accusedRebel;
 
         try {
-            denunciation.setAccuserRebel(rebelService.findRebelByUUID(accuserId));
+            accuserRebel = rebelService.findRebelByUUID(accuserId);
         } catch (RebelNotFoundException e) {
             throw new AccuserRebelNotFoundException();
         }
 
         try {
-            denunciation.setAccusedRebel(rebelService.findRebelByUUID(accusedId));
+            accusedRebel = rebelService.findRebelByUUID(accusedId);
         } catch (RebelNotFoundException e) {
             throw new AccusedRebelNotFoundException();
         }
+
+        // check unique pair accuser rebel and accused rebel
+        if (denunciationService.findByAccuserAndAccused(accuserRebel, accusedRebel).isPresent()) {
+            throw new RepeatedDenunciationException();
+        }
+
+        denunciation.setAccuserRebel(accuserRebel);
+        denunciation.setAccusedRebel(accusedRebel);
 
         return denunciation;
     }

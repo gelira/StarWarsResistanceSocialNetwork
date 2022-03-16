@@ -7,6 +7,7 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Denunciation;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.AccusedRebelNotFoundException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.AccuserRebelNotFoundException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.AutoDenunciationException;
+import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RepeatedDenunciationException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.DenunciationMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.DenunciationService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,8 @@ public class DenunciationController {
 
     @PostMapping
     public DenunciationDTO createDenunciation(@Valid @RequestBody CreateDenunciationDTO createDenunciationDTO)
-            throws AccusedRebelNotFoundException, AutoDenunciationException, AccuserRebelNotFoundException {
+            throws AccusedRebelNotFoundException, AutoDenunciationException,
+                AccuserRebelNotFoundException, RepeatedDenunciationException {
 
         Denunciation denunciationToCreate = denunciationBusiness.validateDenunciation(createDenunciationDTO);
         Denunciation denunciationCreated = denunciationService.createDenunciation(denunciationToCreate);
