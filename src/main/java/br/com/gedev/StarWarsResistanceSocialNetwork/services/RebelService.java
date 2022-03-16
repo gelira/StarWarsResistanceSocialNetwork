@@ -25,11 +25,15 @@ public class RebelService {
         Rebel rebelCreated = rebelRepository.save(rebel);
 
         location.setRebel(rebelCreated);
-        locationService.createLocation(location);
+        Location locationCreated = locationService.createLocation(location);
+
+        rebelCreated.getLocations().add(locationCreated);
 
         for (ItemRebel itemRebel : itemRebelList) {
             itemRebel.setRebel(rebelCreated);
-            itemRebelService.createItemRebel(itemRebel);
+            ItemRebel itemRebelCreated = itemRebelService.createItemRebel(itemRebel);
+
+            rebelCreated.getItemsRebel().add(itemRebelCreated);
         }
 
         return rebelCreated;
