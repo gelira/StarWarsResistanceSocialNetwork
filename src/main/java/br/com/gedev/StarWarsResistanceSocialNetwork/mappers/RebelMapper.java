@@ -6,7 +6,6 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.dto.RebelDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.RebelNameDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.ItemRebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
-import br.com.gedev.StarWarsResistanceSocialNetwork.services.ItemRebelService;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -22,7 +21,6 @@ public class RebelMapper {
     private final LocationMapper locationMapper;
     private final ItemRebelMapper itemRebelMapper;
     private final LocationService locationService;
-    private final ItemRebelService itemRebelService;
 
     public Rebel fromCreateDTOToEntity(CreateRebelDTO dto) {
         return modelMapper.map(dto, Rebel.class);
@@ -34,7 +32,7 @@ public class RebelMapper {
                 location -> dto.setLocation(locationMapper.fromEntityToDTO(location)));
 
         List<ItemRebelDTO> itemRebelDTOList = new ArrayList<>();
-        for (ItemRebel itemRebel : itemRebelService.findItemsRebel(entity)) {
+        for (ItemRebel itemRebel : entity.getItemsRebel()) {
             itemRebelDTOList.add(itemRebelMapper.fromEntityToDTO(itemRebel));
         }
 

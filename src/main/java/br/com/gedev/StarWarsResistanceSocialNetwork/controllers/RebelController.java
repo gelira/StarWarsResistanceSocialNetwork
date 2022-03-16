@@ -7,7 +7,6 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Location;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.InvalidItemIdException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RebelNotFoundException;
-import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.ItemRebelMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.LocationMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.RebelMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.LocationService;
@@ -27,7 +26,6 @@ public class RebelController {
     private final RebelMapper rebelMapper;
     private final LocationService locationService;
     private final LocationMapper locationMapper;
-    private final ItemRebelMapper itemRebelMapper;
     private final ItemRebelBusiness itemRebelBusiness;
 
     @PostMapping

@@ -16,8 +16,4 @@ public class ItemRebelService {
     public ItemRebel createItemRebel(ItemRebel itemRebel) {
         return itemRebelRepository.save(itemRebel);
     }
-
-    public List<ItemRebel> findItemsRebel(Rebel rebel) {
-        return itemRebelRepository.findByRebelId(rebel.getId());
-    }
 }

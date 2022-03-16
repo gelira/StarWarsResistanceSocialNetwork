@@ -1,15 +1,17 @@
 package br.com.gedev.StarWarsResistanceSocialNetwork.entities;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "rebels")
 public class Rebel {
@@ -36,13 +38,11 @@ public class Rebel {
     @Setter(AccessLevel.NONE)
     private Date updatedAt;
 
-    @OneToMany
-    @JoinColumn(name = "rebel_id")
+    @OneToMany(mappedBy = "rebel")
     @Setter(AccessLevel.NONE)
     private List<Location> locations;
 
-    @OneToMany
-    @JoinColumn(name = "rebel_id")
+    @OneToMany(mappedBy = "rebel")
     @Setter(AccessLevel.NONE)
     private List<ItemRebel> itemsRebel;
 
@@ -52,6 +52,8 @@ public class Rebel {
         accusedCount = 0;
         createdAt = new Date();
         updatedAt = new Date();
+        locations = new ArrayList<>();
+        itemsRebel = new ArrayList<>();
     }
 
     @PreUpdate

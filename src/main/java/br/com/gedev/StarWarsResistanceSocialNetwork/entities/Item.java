@@ -1,14 +1,15 @@
 package br.com.gedev.StarWarsResistanceSocialNetwork.entities;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "items")
 public class Item {
@@ -34,6 +35,8 @@ public class Item {
     @PrePersist
     private void prePersist() {
         _id = UUID.randomUUID();
+        createdAt = new Date();
+        updatedAt = new Date();
     }
 
     @PreUpdate

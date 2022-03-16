@@ -1,15 +1,17 @@
 package br.com.gedev.StarWarsResistanceSocialNetwork.entities;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "deals")
 public class Deal {
@@ -29,8 +31,7 @@ public class Deal {
     @JoinColumn(name = "rebel2_id")
     private Rebel rebel2;
 
-    @OneToMany
-    @JoinColumn(name = "deal_id")
+    @OneToMany(mappedBy = "deal")
     @Setter(AccessLevel.NONE)
     private List<DealItem> dealItems;
 
@@ -45,6 +46,9 @@ public class Deal {
     @PrePersist
     private void prePersist() {
         _id = UUID.randomUUID();
+        createdAt = new Date();
+        updatedAt = new Date();
+        dealItems = new ArrayList<>();
     }
 
     @PreUpdate
