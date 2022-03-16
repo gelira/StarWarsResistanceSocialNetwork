@@ -13,6 +13,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "rebels")
 public class Rebel {
+    private static final int LIMIT_TRAITOR_DENUNCIATIONS = 3;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
@@ -55,5 +57,9 @@ public class Rebel {
     @PreUpdate
     private void preUpdate() {
         updatedAt = new Date();
+    }
+
+    public boolean isTraitor() {
+        return accusedCount >= LIMIT_TRAITOR_DENUNCIATIONS;
     }
 }

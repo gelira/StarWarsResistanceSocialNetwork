@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -34,8 +35,15 @@ public class RebelService {
         return rebelCreated;
     }
 
+    public Optional<Rebel> findOptionalRebelByUUID(UUID rebelId) {
+        return rebelRepository.findByUUID(rebelId);
+    }
+
     public Rebel findRebelByUUID(UUID rebelId) throws RebelNotFoundException {
-        return rebelRepository.findByUUID(rebelId)
-                .orElseThrow(RebelNotFoundException::new);
+        return findOptionalRebelByUUID(rebelId).orElseThrow(RebelNotFoundException::new);
+    }
+
+    public void incrementRebelAccusedCount(Rebel rebel) {
+        rebelRepository.incrementRebelAccusedCount(rebel.getId());
     }
 }

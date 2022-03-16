@@ -39,6 +39,8 @@ public class Denunciation {
     @PrePersist
     private void prePersist() {
         _id = UUID.randomUUID();
+        createdAt = new Date();
+        updatedAt = new Date();
     }
 
     @PreUpdate

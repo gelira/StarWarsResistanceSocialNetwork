@@ -3,6 +3,7 @@ package br.com.gedev.StarWarsResistanceSocialNetwork.mappers;
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.CreateRebelDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.ItemRebelDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.RebelDTO;
+import br.com.gedev.StarWarsResistanceSocialNetwork.dto.RebelNameDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.ItemRebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.ItemRebelService;
@@ -40,5 +41,9 @@ public class RebelMapper {
         dto.setInventory(itemRebelDTOList);
 
         return dto;
+    }
+
+    public RebelNameDTO fromEntityToRebelNameDTO(Rebel entity) {
+        return modelMapper.map(entity, RebelNameDTO.class);
     }
 }

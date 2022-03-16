@@ -1,21 +1,25 @@
 package br.com.gedev.StarWarsResistanceSocialNetwork.business;
 
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.CreateItemRebelDTO;
+import br.com.gedev.StarWarsResistanceSocialNetwork.entities.ItemRebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.enums.ItemsEnum;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.InvalidItemIdException;
+import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.ItemRebelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@RequiredArgsConstructor
 @Component
 public class ItemRebelBusiness {
-    public List<CreateItemRebelDTO> validateAndAggregateItems(
-            List<CreateItemRebelDTO> createItemRebelDTOs) throws InvalidItemIdException {
+    private final ItemRebelMapper itemRebelMapper;
 
-        ItemsEnum[] itemsEnums = ItemsEnum.values();
+    public List<ItemRebel> validateAndAggregateItems(
+            List<CreateItemRebelDTO> createItemRebelDTOs) throws InvalidItemIdException {
         Map<UUID, CreateItemRebelDTO> mapItems = new HashMap<>();
 
-        for (ItemsEnum itemEnum : itemsEnums) {
+        for (ItemsEnum itemEnum : ItemsEnum.values()) {
             UUID itemId = itemEnum.getUUID();
 
             CreateItemRebelDTO itemMap = new CreateItemRebelDTO();
@@ -38,11 +42,11 @@ public class ItemRebelBusiness {
             itemMap.setQuantity(itemMap.getQuantity() + createItemRebelDTO.getQuantity());
         }
 
-        List<CreateItemRebelDTO> returnListDTO = new ArrayList<>();
+        List<ItemRebel> entitiesList = new ArrayList<>();
         for (Map.Entry<UUID, CreateItemRebelDTO> mapItem : mapItems.entrySet()) {
-            returnListDTO.add(mapItem.getValue());
+            entitiesList.add(itemRebelMapper.fromCreateDTOToEntity(mapItem.getValue()));
         }
 
-        return returnListDTO;
+        return entitiesList;
     }
 }

@@ -9,25 +9,17 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RequiredArgsConstructor
 @Component
 public class ItemRebelMapper {
     private final ModelMapper modelMapper;
     private final ItemService itemService;
 
-    public List<ItemRebel> fromCreateDTOListToEntityList(List<CreateItemRebelDTO> createItemRebelDTOList) {
-        List<ItemRebel> itemRebelList = new ArrayList<>();
+    public ItemRebel fromCreateDTOToEntity(CreateItemRebelDTO createItemRebelDTO) {
+        ItemRebel entity = modelMapper.map(createItemRebelDTO, ItemRebel.class);
+        itemService.findItemByUUID(createItemRebelDTO.getItemId()).ifPresent(entity::setItem);
 
-        for (CreateItemRebelDTO dto : createItemRebelDTOList) {
-            ItemRebel entity = modelMapper.map(dto, ItemRebel.class);
-            itemService.findItemByUUID(dto.getItemId()).ifPresent(entity::setItem);
-            itemRebelList.add(entity);
-        }
-
-        return itemRebelList;
+        return entity;
     }
 
     public ItemRebelDTO fromEntityToDTO(ItemRebel entity) {
