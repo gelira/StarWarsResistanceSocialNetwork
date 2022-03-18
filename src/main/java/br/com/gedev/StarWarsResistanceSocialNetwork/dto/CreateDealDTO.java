@@ -23,10 +23,12 @@ public class CreateDealDTO {
     @NotNull
     private UUID rebel2Id;
 
+    @JsonProperty("rebel1_items")
     @NotEmpty
     @NotNull
     private List<@Valid CreateItemDealDTO> rebel1Items;
 
+    @JsonProperty("rebel2_items")
     @NotEmpty
     @NotNull
     private List<@Valid CreateItemDealDTO> rebel2Items;
