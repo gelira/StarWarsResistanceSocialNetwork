@@ -7,7 +7,6 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RebelNotFoundExce
 import br.com.gedev.StarWarsResistanceSocialNetwork.repositories.RebelRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +19,6 @@ public class RebelService {
     private final LocationService locationService;
     private final ItemRebelService itemRebelService;
 
-    @Transactional
     public Rebel createRebel(Rebel rebel, Location location, List<ItemRebel> itemRebelList) {
         Rebel rebelCreated = rebelRepository.save(rebel);
 

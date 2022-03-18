@@ -5,7 +5,6 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.entities.DealItem;
 import br.com.gedev.StarWarsResistanceSocialNetwork.repositories.DealRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class DealService {
     private final DealItemService dealItemService;
     private final ItemRebelService itemRebelService;
 
-    @Transactional
     public Deal createDeal(Deal deal, List<DealItem> dealItemsRebel1, List<DealItem> dealItemsRebel2) {
         Deal dealCreated = dealRepository.save(deal);
 
