@@ -17,7 +17,7 @@ public class ItemRebelMapper {
 
     public ItemRebel fromCreateDTOToEntity(CreateItemRebelDTO createItemRebelDTO) {
         ItemRebel entity = modelMapper.map(createItemRebelDTO, ItemRebel.class);
-        itemService.findItemByUUID(createItemRebelDTO.getItemId()).ifPresent(entity::setItem);
+        itemService.findOptionalItemByUUID(createItemRebelDTO.getItemId()).ifPresent(entity::setItem);
 
         return entity;
     }

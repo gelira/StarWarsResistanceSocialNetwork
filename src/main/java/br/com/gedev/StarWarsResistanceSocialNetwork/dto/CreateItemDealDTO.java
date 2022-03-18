@@ -5,18 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateDenunciationDTO {
-    @JsonProperty("accuser_rebel_id")
+public class CreateItemDealDTO {
+    @JsonProperty("item_id")
     @NotNull
-    private UUID accuserRebelId;
+    private UUID itemId;
 
-    @JsonProperty("accused_rebel_id")
     @NotNull
-    private UUID accusedRebelId;
+    @Min(1)
+    private Integer quantity;
 }
