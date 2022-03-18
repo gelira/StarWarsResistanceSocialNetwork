@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class DealBusiness {
     @Transactional
     public DealDTO createDeal(CreateDealDTO createDealDTO)
             throws DealRebelTraitorException, RebelNotFoundException, InsufficientItemsException,
-            InvalidItemIdException, DealItemPointsNotEquivalentException {
+            InvalidItemIdException, DealItemPointsNotEquivalentException, AutoDealException {
 
         Deal dealToCreate = validateDeal(createDealDTO);
 
@@ -42,11 +43,20 @@ public class DealBusiness {
         return dealMapper.fromEntityToDTO(dealCreated);
     }
 
-    public Deal validateDeal(CreateDealDTO createDealDTO) throws RebelNotFoundException, DealRebelTraitorException {
+    public Deal validateDeal(CreateDealDTO createDealDTO)
+            throws RebelNotFoundException, DealRebelTraitorException, AutoDealException {
+
+        UUID rebel1Id = createDealDTO.getRebel1Id();
+        UUID rebel2Id = createDealDTO.getRebel2Id();
+
+        if (Objects.equals(rebel1Id, rebel2Id)) {
+            throw new AutoDealException();
+        }
+
         Deal entity = new Deal();
 
-        entity.setRebel1(findAndCheckRebel(createDealDTO.getRebel1Id()));
-        entity.setRebel2(findAndCheckRebel(createDealDTO.getRebel2Id()));
+        entity.setRebel1(findAndCheckRebel(rebel1Id));
+        entity.setRebel2(findAndCheckRebel(rebel2Id));
 
         return entity;
     }

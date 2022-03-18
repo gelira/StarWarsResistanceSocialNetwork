@@ -21,7 +21,7 @@ public class DealController {
     @PostMapping
     public DealDTO createDeal(@Valid @RequestBody CreateDealDTO createDealDTO)
             throws DealRebelTraitorException, RebelNotFoundException, InsufficientItemsException,
-            InvalidItemIdException, DealItemPointsNotEquivalentException {
+            InvalidItemIdException, DealItemPointsNotEquivalentException, AutoDealException {
 
         return dealBusiness.createDeal(createDealDTO);
     }
