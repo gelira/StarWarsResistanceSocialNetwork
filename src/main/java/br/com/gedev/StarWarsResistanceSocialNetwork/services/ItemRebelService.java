@@ -32,4 +32,8 @@ public class ItemRebelService {
 
         return createItemRebel(itemRebel);
     }
+
+    public void updateItemRebelQuantity(Rebel rebel, Item item, int change) {
+        itemRebelRepository.updateQuantityItemRebel(rebel.getId(), item.getId(), change);
+    }
 }
