@@ -1,13 +1,16 @@
 package br.com.gedev.StarWarsResistanceSocialNetwork.business;
 
 import br.com.gedev.StarWarsResistanceSocialNetwork.dto.CreateDenunciationDTO;
+import br.com.gedev.StarWarsResistanceSocialNetwork.dto.DenunciationDTO;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Denunciation;
 import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.*;
+import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.DenunciationMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.DenunciationService;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.RebelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -17,6 +20,17 @@ import java.util.UUID;
 public class DenunciationBusiness {
     private final RebelService rebelService;
     private final DenunciationService denunciationService;
+    private final DenunciationMapper denunciationMapper;
+
+    @Transactional
+    public DenunciationDTO createDenunciation(CreateDenunciationDTO createDenunciationDTO)
+            throws AccusedRebelNotFoundException, AutoDenunciationException,
+            AccuserRebelNotFoundException, RepeatedDenunciationException {
+
+        Denunciation denunciationToCreate = validateDenunciation(createDenunciationDTO);
+        Denunciation denunciationCreated = denunciationService.createDenunciation(denunciationToCreate);
+        return denunciationMapper.fromEntityToDTO(denunciationCreated);
+    }
 
     public Denunciation validateDenunciation(CreateDenunciationDTO createDenunciationDTO)
             throws AutoDenunciationException, AccuserRebelNotFoundException,
