@@ -6,6 +6,7 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.repositories.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class ItemService {
         return findOptionalItemByUUID(itemId).orElseThrow(InvalidItemIdException::new);
     }
 
-    public Iterable<Item> findAllItems() {
-        return itemRepository.findAll();
+    public List<Item> findAllItems() {
+        return itemRepository.findAllItems();
     }
 }
