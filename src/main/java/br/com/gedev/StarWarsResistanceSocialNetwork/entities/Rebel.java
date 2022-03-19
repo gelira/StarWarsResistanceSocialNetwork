@@ -15,7 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "rebels")
 public class Rebel {
-    private static final int LIMIT_TRAITOR_DENUNCIATIONS = 3;
+    public static final int LIMIT_TRAITOR_DENUNCIATIONS = 3;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
