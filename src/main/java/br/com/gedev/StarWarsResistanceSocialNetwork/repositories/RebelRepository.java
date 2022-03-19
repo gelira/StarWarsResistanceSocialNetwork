@@ -18,4 +18,13 @@ public interface RebelRepository extends CrudRepository<Rebel, Long> {
             "set r.accusedCount = r.accusedCount + 1 " +
             "where r.id = :rebel_id")
     void incrementRebelAccusedCount(@Param("rebel_id") Long rebelId);
+
+    @Query("select count(r) from Rebel r")
+    long countAllRebels();
+
+    @Query("select count(r) from Rebel r where r.accusedCount < :accused_count_limit")
+    long countRebels(@Param("accused_count_limit") int accusedCountLimit);
+
+    @Query("select count(r) from Rebel r where r.accusedCount >= :accused_count_limit")
+    long countTraitors(@Param("accused_count_limit") int accusedCountLimit);
 }
