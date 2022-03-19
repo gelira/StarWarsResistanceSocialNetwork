@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -17,6 +18,11 @@ import java.util.UUID;
 public class RebelController {
     private final RebelBusiness rebelBusiness;
     private final LocationBusiness locationBusiness;
+
+    @GetMapping
+    public List<RebelDTO> listAllRebels() {
+        return rebelBusiness.listAllRebels();
+    }
 
     @PostMapping
     public RebelDTO createRebel(@Valid @RequestBody CreateRebelDTO createRebelDTO) throws InvalidItemIdException {
