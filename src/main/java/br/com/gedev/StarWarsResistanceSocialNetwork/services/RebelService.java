@@ -19,8 +19,8 @@ public class RebelService {
     private final LocationService locationService;
     private final ItemRebelService itemRebelService;
 
-    public Iterable<Rebel> listAllRebels() {
-        return rebelRepository.findAll();
+    public List<Rebel> listAllRebels() {
+        return rebelRepository.findAllRebels();
     }
 
     public Rebel createRebel(Rebel rebel, Location location, List<ItemRebel> itemRebelList) {
