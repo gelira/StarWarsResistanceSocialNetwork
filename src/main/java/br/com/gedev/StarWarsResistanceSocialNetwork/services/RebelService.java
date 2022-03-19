@@ -48,4 +48,16 @@ public class RebelService {
     public void incrementRebelAccusedCount(Rebel rebel) {
         rebelRepository.incrementRebelAccusedCount(rebel.getId());
     }
+
+    public long countAllRebels() {
+        return rebelRepository.countAllRebels();
+    }
+
+    public long countRebels() {
+        return rebelRepository.countRebels(Rebel.LIMIT_TRAITOR_DENUNCIATIONS);
+    }
+
+    public long countTraitors() {
+        return rebelRepository.countTraitors(Rebel.LIMIT_TRAITOR_DENUNCIATIONS);
+    }
 }

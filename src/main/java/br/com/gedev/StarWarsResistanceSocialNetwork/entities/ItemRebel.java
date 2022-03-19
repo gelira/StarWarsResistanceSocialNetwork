@@ -27,7 +27,7 @@ public class ItemRebel {
     @JoinColumn(name = "rebel_id")
     private Rebel rebel;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
     private Item item;
 
