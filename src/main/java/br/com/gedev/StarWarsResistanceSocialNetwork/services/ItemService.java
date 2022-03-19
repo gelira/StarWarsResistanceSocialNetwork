@@ -21,4 +21,8 @@ public class ItemService {
     public Item findItemByUUID(UUID itemId) throws InvalidItemIdException {
         return findOptionalItemByUUID(itemId).orElseThrow(InvalidItemIdException::new);
     }
+
+    public Iterable<Item> findAllItems() {
+        return itemRepository.findAll();
+    }
 }
