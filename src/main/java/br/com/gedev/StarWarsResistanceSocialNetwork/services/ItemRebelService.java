@@ -7,6 +7,7 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.repositories.ItemRebelReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -35,5 +36,13 @@ public class ItemRebelService {
 
     public void updateItemRebelQuantity(Rebel rebel, Item item, int change) {
         itemRebelRepository.updateQuantityItemRebel(rebel.getId(), item.getId(), change);
+    }
+
+    public List<ItemRebel> findItemsRebels() {
+        return itemRebelRepository.findItemsRebels(Rebel.LIMIT_TRAITOR_DENUNCIATIONS);
+    }
+
+    public List<ItemRebel> findItemsTraitors() {
+        return itemRebelRepository.findItemsTraitors(Rebel.LIMIT_TRAITOR_DENUNCIATIONS);
     }
 }

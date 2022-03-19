@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ItemRebelRepository extends CrudRepository<ItemRebel, Long> {
@@ -18,4 +19,10 @@ public interface ItemRebelRepository extends CrudRepository<ItemRebel, Long> {
             "where i.rebel.id = :rebel_id and i.item.id = :item_id")
     void updateQuantityItemRebel(
             @Param("rebel_id") Long rebelId, @Param("item_id") Long itemId, @Param("change") int change);
+
+    @Query("select i from ItemRebel i where i.rebel.accusedCount < :accused_count_limit")
+    List<ItemRebel> findItemsRebels(@Param("accused_count_limit") int accusedCountLimit);
+
+    @Query("select i from ItemRebel i where i.rebel.accusedCount >= :accused_count_limit")
+    List<ItemRebel> findItemsTraitors(@Param("accused_count_limit") int accusedCountLimit);
 }
