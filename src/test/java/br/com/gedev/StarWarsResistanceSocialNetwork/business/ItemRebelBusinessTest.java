@@ -18,7 +18,7 @@ class ItemRebelBusinessTest {
     @Autowired
     private ItemRebelBusiness itemRebelBusiness;
 
-    List<CreateItemRebelDTO> generateListDTOSuccess() {
+    List<CreateItemRebelDTO> generateListDTOSuccess(boolean toFail) {
         List<CreateItemRebelDTO> dtoList = new ArrayList<>();
 
         CreateItemRebelDTO arma1 = new CreateItemRebelDTO();
@@ -41,12 +41,20 @@ class ItemRebelBusinessTest {
         comida.setQuantity(3);
         dtoList.add(comida);
 
+        if (toFail) {
+            CreateItemRebelDTO failItem = new CreateItemRebelDTO();
+            failItem.setItemId(UUID.randomUUID());
+            failItem.setQuantity(3);
+            dtoList.add(failItem);
+        }
+
         return dtoList;
     }
 
     @Test
     void validateAndAggregateItemsSuccessful() throws InvalidItemIdException {
-        List<ItemRebel> itemRebelList = itemRebelBusiness.validateAndAggregateItems(generateListDTOSuccess());
+        List<ItemRebel> itemRebelList = itemRebelBusiness.validateAndAggregateItems(
+                generateListDTOSuccess(false));
 
         Assertions.assertThat(itemRebelList).hasSize(4);
         for (ItemRebel itemRebel : itemRebelList) {
@@ -71,5 +79,12 @@ class ItemRebelBusinessTest {
                 throw new AssertionError("item id not found");
             }
         }
+    }
+
+    @Test
+    void validateAndAggregateItemsFail() {
+        Assertions.assertThatThrownBy(
+                () -> itemRebelBusiness.validateAndAggregateItems(generateListDTOSuccess(true))
+        ).isInstanceOf(InvalidItemIdException.class);
     }
 }
