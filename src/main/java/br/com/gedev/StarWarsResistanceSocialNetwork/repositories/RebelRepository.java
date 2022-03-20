@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,4 +28,7 @@ public interface RebelRepository extends CrudRepository<Rebel, Long> {
 
     @Query("select count(r) from Rebel r where r.accusedCount >= :accused_count_limit")
     long countTraitors(@Param("accused_count_limit") int accusedCountLimit);
+
+    @Query("select r from Rebel r order by r.name asc, r.createdAt desc")
+    List<Rebel> findAllRebels();
 }

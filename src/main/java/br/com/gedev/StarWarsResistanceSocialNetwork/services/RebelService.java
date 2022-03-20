@@ -19,6 +19,10 @@ public class RebelService {
     private final LocationService locationService;
     private final ItemRebelService itemRebelService;
 
+    public List<Rebel> listAllRebels() {
+        return rebelRepository.findAllRebels();
+    }
+
     public Rebel createRebel(Rebel rebel, Location location, List<ItemRebel> itemRebelList) {
         Rebel rebelCreated = rebelRepository.save(rebel);
 

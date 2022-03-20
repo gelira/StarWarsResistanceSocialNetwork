@@ -12,7 +12,12 @@ import java.util.UUID;
 public class DealItemDTO {
     private UUID _id;
     private Integer quantity;
-    private ItemDTO item;
+
+    @JsonProperty("item_id")
+    private UUID itemId;
+
+    @JsonProperty("item_name")
+    private String itemName;
 
     @JsonProperty("source_rebel")
     private RebelNameDTO sourceRebel;

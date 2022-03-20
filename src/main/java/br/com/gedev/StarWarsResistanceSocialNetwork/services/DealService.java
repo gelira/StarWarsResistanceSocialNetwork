@@ -24,6 +24,10 @@ public class DealService {
         return dealCreated;
     }
 
+    public List<Deal> findAllDeals() {
+        return dealRepository.findAllDeals();
+    }
+
     private void saveDealItems(Deal deal, List<DealItem> dealItemsRebel) {
         for (DealItem dealItemToCreate : dealItemsRebel) {
             dealItemToCreate.setDeal(deal);

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -32,5 +33,15 @@ public class RebelBusiness {
 
         Rebel rebelCreated = rebelService.createRebel(rebelToCreate, locationToCreate, itemRebelList);
         return rebelMapper.fromEntityToRebelDTO(rebelCreated);
+    }
+
+    public List<RebelDTO> listAllRebels() {
+        List<RebelDTO> dtoList = new ArrayList<>();
+
+        for (Rebel rebel : rebelService.listAllRebels()) {
+            dtoList.add(rebelMapper.fromEntityToRebelDTO(rebel));
+        }
+
+        return dtoList;
     }
 }

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -59,6 +60,16 @@ public class DealBusiness {
         entity.setRebel2(findAndCheckRebel(rebel2Id));
 
         return entity;
+    }
+
+    public List<DealDTO> listAllDeals() {
+        List<DealDTO> dtoList = new ArrayList<>();
+
+        for (Deal deal : dealService.findAllDeals()) {
+            dtoList.add(dealMapper.fromEntityToDTO(deal));
+        }
+
+        return dtoList;
     }
 
     private Rebel findAndCheckRebel(UUID rebelId) throws DealRebelTraitorException, RebelNotFoundException {
