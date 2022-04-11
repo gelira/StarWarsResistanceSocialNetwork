@@ -6,10 +6,13 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.dto.*;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.InvalidItemIdException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RebelNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -20,8 +23,12 @@ public class RebelController {
     private final LocationBusiness locationBusiness;
 
     @GetMapping
-    public List<RebelDTO> listAllRebels() {
-        return rebelBusiness.listAllRebels();
+    public Page<RebelDTO> listAllRebels(
+            @SortDefault.SortDefaults({
+                    @SortDefault(sort = "name", direction = Sort.Direction.ASC),
+                    @SortDefault(sort = "createdAt", direction = Sort.Direction.DESC)
+            }) Pageable pageable) {
+        return rebelBusiness.listAllRebels(pageable);
     }
 
     @PostMapping
