@@ -10,10 +10,11 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.LocationMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.mappers.RebelMapper;
 import br.com.gedev.StarWarsResistanceSocialNetwork.services.RebelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -35,13 +36,7 @@ public class RebelBusiness {
         return rebelMapper.fromEntityToRebelDTO(rebelCreated);
     }
 
-    public List<RebelDTO> listAllRebels() {
-        List<RebelDTO> dtoList = new ArrayList<>();
-
-        for (Rebel rebel : rebelService.listAllRebels()) {
-            dtoList.add(rebelMapper.fromEntityToRebelDTO(rebel));
-        }
-
-        return dtoList;
+    public Page<RebelDTO> listAllRebels(Pageable pageable) {
+        return rebelService.listAllRebels(pageable).map(rebelMapper::fromEntityToRebelDTO);
     }
 }

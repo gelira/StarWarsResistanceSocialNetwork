@@ -6,6 +6,8 @@ import br.com.gedev.StarWarsResistanceSocialNetwork.entities.Rebel;
 import br.com.gedev.StarWarsResistanceSocialNetwork.exceptions.RebelNotFoundException;
 import br.com.gedev.StarWarsResistanceSocialNetwork.repositories.RebelRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,10 @@ public class RebelService {
 
     public List<Rebel> listAllRebels() {
         return rebelRepository.findAllRebels();
+    }
+
+    public Page<Rebel> listAllRebels(Pageable pageable) {
+        return rebelRepository.findAll(pageable);
     }
 
     public Rebel createRebel(Rebel rebel, Location location, List<ItemRebel> itemRebelList) {
